@@ -7,9 +7,10 @@ import hashlib
 import shutil
 import re
 import humanize
-
+from config import config
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'
+env = os.environ.get('FLASK_ENV', 'development')
+app.config.from_object(config[env])
 
 ROOT_FOLDER = 'uploads'
 os.makedirs(ROOT_FOLDER, exist_ok=True)
